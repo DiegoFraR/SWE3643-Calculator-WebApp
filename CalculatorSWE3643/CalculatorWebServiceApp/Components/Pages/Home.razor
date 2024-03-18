@@ -1,7 +1,110 @@
 ﻿@page "/"
 
-<PageTitle>Home</PageTitle>
-
-<h1>Hello, world!</h1>
-
-Welcome to your new app.
+<PageTitle>Calculator</PageTitle>
+  
+<head> 
+    <title>Calculator Web App</title> 
+  
+    <!-- For styling -->
+    <style> 
+        table { 
+            margin-left: auto; 
+            margin-right: auto; 
+        } 
+          
+        .button { 
+            width: 100%; 
+            padding: 10px 20px; 
+            background-color: #2792a1; 
+            color: #ffffff; 
+            font-size: 15px; 
+            font-weight: bold; 
+            border: none; 
+            border-radius: 5px;
+        } 
+        
+        .button:hover{
+            background-color: #144750; 
+        }
+          
+        th,
+         td{ 
+            padding: 10px 15px; 
+            font-size: 15px; 
+            font-weight: bold; 
+            border: none; 
+            border-radius: 5px; 
+            //border: 2px solid black;
+            text-align: left;
+        } 
+    </style> 
+</head> 
+  
+<body> 
+    <!-- Create table -->
+    <table id="calcu"> 
+        <tr> 
+            <th><font size="6">Calculator</font></th> 
+            <td><button class="button" id="clear">Clear</button></td>
+        </tr> 
+        
+        <tr> 
+            <th colspan="2" bgcolor="#BEDEE2">
+                <font size="4">Enter value(s) below and select an operation.</font>
+            </th> 
+        </tr> 
+        
+        <tr> 
+            <th>Input A</th> 
+            <th>Input B</th> 
+        </tr> 
+        
+        <tr> 
+            <td colspan="1"> 
+                <input type="text" id="aInput"> 
+            </td> 
+            <td colspan="1">
+                 <input type="text" id="bInput">
+            </td> 
+        </tr> 
+  
+        <tr> 
+            <th>A and B</th> 
+            <th>A Only</th> 
+        </tr> 
+        
+        <tr>
+            <td><button class="button" id="add"> A + B</button></td>
+            <td><button class="button" id="!"> A!</button></td>
+        </tr>
+        <tr>
+            <td><button class="button" id="sub">A - B</button></td>
+            <td><button class="button" id="sin">sin A</button></td>
+        </tr>
+        <tr>
+            <td><button class="button" id="multiply">A * B</button></td>
+            <td><button class="button" id="cos">cos A</button></td>
+        </tr>
+        <tr>
+            <td><button class="button" id="divide">A / B</button></td>
+            <td><button class="button" id="tan"> tan A</button></td> 
+        </tr>
+        <tr>
+            <td><button class="button" id="equate"> A == B</button></td>
+            <td><button class="button" id="onedi">1 / A</button></td>
+        </tr>
+        <tr>
+            <td><button class="button" id="power">A ^ B</button></td>
+            <th>Result</th>
+        </tr>
+        <tr>
+            <td><button class="button" id="log">A log B</button></td>
+             <td colspan="1">
+                <input type="text" id="result" value="Result">
+             </td> 
+        </tr>
+        <tr>
+            <td><button class="button" id="root">A root B</button></td>
+        </tr>
+    </table> 
+</body> 
