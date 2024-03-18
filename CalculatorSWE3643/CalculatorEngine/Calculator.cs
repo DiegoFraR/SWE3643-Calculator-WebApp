@@ -50,6 +50,20 @@ public static class Calculator
         }
     }
     
+    //Equivalence
+    public static bool IsEqual(double a, double b)
+    {
+        if (Math.Abs(a - b) < 0.000000001)
+        {
+            return true;
+        }
+        else
+        {
+            Result.Operation = a + " = " + b + "?";
+            return false;
+        }
+    }
+    
     //Raise To Power
     public static double Power(double a, double b)
     {
@@ -145,7 +159,7 @@ public static class Calculator
     private static bool IsFactorialNegative(double a)
     {
         double remainder = a % 2;
-        if (remainder == 1 || remainder == -1)
+        if (!(Math.Abs(remainder - 1) < 0.000001) && Math.Abs(remainder - (-1)) > 0.000001)
         {
             return true;
         }
@@ -155,5 +169,48 @@ public static class Calculator
         }
     }
 
+    //Sine
+    public static double Sine(double a)
+    {
+        Result.Result = Math.Sin(a);
+        Result.Operation = "Sin (" + a + ") ";
+        Result.IsSuccess = true;
+        return Result.Result;
+    }
+    
+    //Cosine
+    public static double Cosine(double a)
+    {
+        Result.Result = Math.Cos(a);
+        Result.Operation = "Cos (" + a + ") ";
+        Result.IsSuccess = true;
+        return Result.Result;
+    } 
+    
+    //Tangent
+    public static double Tangent(double a)
+    {
+        Result.Result = Math.Tan(a);
+        Result.Operation = "Tan (" + a + ") ";
+        Result.IsSuccess = true;
+        return Result.Result;
+    }
+    
+    //Reciprocal 
+    public static double Reciprocal(double a)
+    {
+        if (a == 0)
+        {
+            Result.IsSuccess = false;
+            throw new NotFiniteNumberException();
+        }
+        else
+        {
+            Result.Result = 1/a;
+            Result.Operation = "Reciprocal " + a;
+            Result.IsSuccess = true;
+            return Result.Result;
+        }
+    }
 
 }

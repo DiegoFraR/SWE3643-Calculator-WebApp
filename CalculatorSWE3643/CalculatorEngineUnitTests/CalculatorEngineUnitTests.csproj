@@ -15,4 +15,8 @@
       <ProjectReference Include="..\CalculatorEngine\CalculatorEngine.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Components\Pages\" />
+    </ItemGroup>
+
 </Project>
