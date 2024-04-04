@@ -1,85 +1,93 @@
-﻿using CalculatorEngine.Components;
+﻿namespace CalculatorEngine;
 
-namespace CalculatorEngine;
-
-public static class Calculator
+public class Calculator
 {
-    private static readonly CalculationResult Result = new CalculationResult();
-
+    private static readonly CalculationResult Result= new CalculationResult();
+    
     //Addition
-    public static double Addition(double a, double b)
+    public static CalculationResult Add(double a, double b)
     {
         Result.Result = a + b;
         Result.Operation = a + " + " + b;
         Result.IsSuccess = true;
-        return Result.Result;
+
+        return Result;
     }
-    
+
     //Subtraction
-    public static double Subtraction(double a, double b)
+    public static CalculationResult Subtract(double a, double b)
     {
         Result.Result = a - b;
         Result.Operation = a + " - " + b;
         Result.IsSuccess = true;
-        return Result.Result;
+        return Result;
     }
-    
+
     //Multiplication
-    public static double Multiplication(double a, double b)
+    public static CalculationResult Multiplication(double a, double b)
     {
         Result.Result = a * b;
-        Result.Operation = a + " * " + b;
+        Result.Error = "";
+        Result.Operation = a + " x " + b;
         Result.IsSuccess = true;
-        return Result.Result;
+
+        return Result;
     }
-    
+
     //Division
-    public static double Division(double a, double b)
+    public static CalculationResult Division(double a, double b)
     {
         if (b == 0)
         {
+            Result.Error = "Cannot Divide by 0";
             Result.IsSuccess = false;
-            throw new  DivideByZeroException();
+            throw new DivideByZeroException();
         }
         else
         {
             Result.Result = a / b;
             Result.Operation = a + " / " + b;
             Result.IsSuccess = true;
-            return Result.Result;
+            return Result;
         }
     }
     
     //Equivalence
-    public static bool IsEqual(double a, double b)
+    public static CalculationResult IsEqual(double a, double b)
     {
         if (Math.Abs(a - b) < 0.000000001)
         {
-            return true;
+            Result.Result = 1;
+            Result.Operation = a + " == " + b;
+            Result.IsSuccess = true;
+            return Result;
         }
         else
         {
-            Result.Operation = a + " = " + b + "?";
-            return false;
+            Result.Result = 0;
+            Result.Operation = a + " == " + b;
+            Result.IsSuccess = true;
+            return Result;
         }
     }
     
     //Raise To Power
-    public static double Power(double a, double b)
+    public static CalculationResult Power(double a, double b)
     {
         Result.Result = Math.Pow(a, b);
         Result.Operation = a + " ^ " + b;
         Result.IsSuccess = true;
-        return Result.Result;
+        return Result;
     }
     
     //Logarithm
-    public static double Logarithm(double a, double b)
+    public static CalculationResult Logarithm(double a, double b)
     {
         switch (a)
         {
             case <= 0:
                 Result.IsSuccess = false;
+                Result.Error = "Value of A cannot be equal to or less than 0!";
                 throw new NotFiniteNumberException();
             default:
             {
@@ -87,23 +95,26 @@ public static class Calculator
                 {
                     case 0:
                         Result.IsSuccess = false;
+                        Result.Error = "Value of B cannot equal 0!";
                         throw new NotFiniteNumberException();
                     default:
                         Result.Result = Math.Log(a, b);
                         Result.Operation = a + " log " + b;
                         Result.IsSuccess = true;
-                        return Result.Result;
+                        return Result;
+                        
                 }
             }
         }
     }
     
     //Root
-    public static double Root(double a, double b)
+    public static CalculationResult Root(double a, double b)
     {
         if (b == 0)
         {
             Result.IsSuccess = false;
+            Result.Error = "Value of B cannot be 0!";
             throw new NotFiniteNumberException();
         }
         else
@@ -112,32 +123,33 @@ public static class Calculator
             Result.Result = Math.Pow(a, 1 / b);
             Result.Operation = a + " root " + b;
             Result.IsSuccess = true;
-            return Result.Result;
-
+            return Result;
         }
     }
     
     //Factorial
-    public static double Factorial(double a)
+    public static CalculationResult Factorial(double a)
     {
-        
         if (a == 0)
         {
-            return 1;
+            Result.Result = 1;
+            Result.Operation = "Factorial of " + a;
+            Result.IsSuccess = true;
+            return Result;
         }
         else if (a < 0 && IsFactorialNegative(a))
         {
             int fact = -1;
-            a *= -1; 
+            a *= -1;
             for (int i = 1; i <= a; i++)
             {
-                fact *= i; 
+                fact *= i;
             }
 
             Result.Result = fact;
             Result.Operation = a + "!";
             Result.IsSuccess = true;
-            return Result.Result;
+            return Result;
         }
         else
         {
@@ -145,72 +157,74 @@ public static class Calculator
 
             for (int i = 1; i <= a; i++)
             {
-                fact *= i; 
+                fact *= i;
             }
 
             Result.Result = fact;
             Result.Operation = a + "!";
             Result.IsSuccess = true;
-            return Result.Result;
-        }
-    }
-    
-    //Help Method For Factorial
-    private static bool IsFactorialNegative(double a)
-    {
-        double remainder = a % 2;
-        if (!(Math.Abs(remainder - 1) < 0.000001) && Math.Abs(remainder - (-1)) > 0.000001)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
+            return Result;
         }
     }
 
-    //Sine
-    public static double Sine(double a)
+    //Help Method for Factorial of Negatives
+    private static bool IsFactorialNegative(double a)
     {
-        Result.Result = Math.Sin(a);
+        return (a < 0);
+    }
+    
+    //Sine
+    public static CalculationResult Sine(double a)
+    {
+        a = ConvertToRadians(a);
+        Result.Result = Math.Round(Math.Sin(a), 0);
         Result.Operation = "Sin (" + a + ") ";
         Result.IsSuccess = true;
-        return Result.Result;
+        return Result;
+    }
+    
+    //Helper Method for Sin & Cosine & Tangent
+    private static double ConvertToRadians(double degrees)
+    {
+        double radians = Math.Round((degrees * Math.PI) / 180, 0);
+        return radians;
     }
     
     //Cosine
-    public static double Cosine(double a)
+    public static CalculationResult Cosine(double a)
     {
-        Result.Result = Math.Cos(a);
+        a = ConvertToRadians(a);
+        Result.Result = Math.Round(Math.Cos(a), 0);
         Result.Operation = "Cos (" + a + ") ";
         Result.IsSuccess = true;
-        return Result.Result;
-    } 
-    
-    //Tangent
-    public static double Tangent(double a)
-    {
-        Result.Result = Math.Tan(a);
-        Result.Operation = "Tan (" + a + ") ";
-        Result.IsSuccess = true;
-        return Result.Result;
+        return Result;
     }
     
-    //Reciprocal 
-    public static double Reciprocal(double a)
+    //Tangent
+    public static CalculationResult Tangent(double a)
+    {
+        a = ConvertToRadians(a);
+        Result.Result = Math.Round(Math.Tan(a), 0);
+        Result.Operation = "Tan (" + a + ") ";
+        Result.IsSuccess = true;
+        return Result;
+    }
+    
+    //Reciprocal
+    public static CalculationResult Reciprocal(double a)
     {
         if (a == 0)
         {
             Result.IsSuccess = false;
+            Result.Error = "Cannot Divide by 0!";
             throw new NotFiniteNumberException();
         }
         else
         {
-            Result.Result = 1/a;
+            Result.Result = 1 / a;
             Result.Operation = "Reciprocal " + a;
             Result.IsSuccess = true;
-            return Result.Result;
+            return Result;
         }
     }
-
 }

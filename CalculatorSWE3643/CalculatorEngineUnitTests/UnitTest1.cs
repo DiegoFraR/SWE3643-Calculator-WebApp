@@ -1,137 +1,143 @@
-﻿
 using CalculatorEngine;
-using CalculatorEngine.Components;
-using NUnit.Framework;
 
+namespace CalculatorEngineUnitTests;
 
-namespace CalculatorEngineUnitTests.Components;
-
-[TestFixture]
-public class CalculatorUnitTests
+public class Tests
 {
     //Addition Test
     
     //preq-UNIT-TEST-2
     [Test]
-    public void CalculatorAddition_AddTwoIntegers_Add()
+    public void CalculatorAddition_TwoFloatingPointValues_ReturnsSum()
     {
         //Arrange
-        var result = new CalculationResult();
-        const double a = 5.5;
-        const double b = -3.15;
-        
+        const double a = 1.5;
+        const double b = 2.75;
+        const double expected = 4.25;
+
         //Act
-        result.Result = Calculator.Addition(a, b);
+        var result = Calculator.Add(a,b);
         
         //Assert
-        Assert.That(result.Result, Is.EqualTo(2.35));
-
+        Assert.That(result.Result, Is.EqualTo(expected));
     }
     
     //Subtraction Test
     
     //preq-UNIT-TEST-3
     [Test]
-    public void CalculatorSubtraction_SubtractTwoIntegers_Subtraction()
+    public void CalculatorSubtraction_TwoFloatingPointValues_ReturnsDifference()
     {
         //Arrange
-        var result = new CalculationResult();
         const double a = 27.93;
         const double b = 4;
-        
+        const double expected = 23.93;
         //Act
-        result.Result = Calculator.Subtraction(a, b);
+        var result = Calculator.Subtract(a, b);
         
         //Assert
-        Assert.That(result.Result, Is.EqualTo(23.93));
+        Assert.That(result.Result, Is.EqualTo(expected));
     }
     
-    //Multiplication
+    //Multiplication Test
     
     //preq-UNIT-TEST-4
     [Test]
-    public void CalculatorMultiplication_MultiplyTwoIntegers_Multiplication()
+    public void CalculatorMultiplication_TwoFloatingPointValues_ReturnsMultiplication()
     {
         //Arrange
-        var result = new CalculationResult();
         const double a = 5;
         const double b = 7.1;
+        const double expected = 35.5;
         
         //Act
-        result.Result = Calculator.Multiplication(a, b);
+        var result = Calculator.Multiplication(a, b);
         
         //Assert
-        Assert.That(result.Result, Is.EqualTo(35.5));
+        Assert.That(result.Result, Is.EqualTo(expected));
     }
-
+    
     //Division Tests
     
     //preq-UNIT-TEST-5
     [Test]
-    //Need to set up Equality Method to make this test pass
-    public void CalculatorDivision_DivideTwoIntegers_Divide()
+    public void CalculatorDivision_TwoFloatingPointValues_ReturnsDivision()
     {
         //Arrange
-        var result = new CalculationResult();
         const double a = 3.0;
         const double b = 9.0;
+        const double expected = 0.33333333;
         
         //Act
-        result.Result = Calculator.Division(a, b);
+        var result = Calculator.Division(a, b);
+        result.Result = Math.Round(result.Result, 8);
         
         //Assert
-        Assert.That(result.Result, Is.EqualTo(.33333333));
+        Assert.That(result.Result, Is.EqualTo(expected));
     }
+    
     
     //preq-UNIT-TEST-6
     [Test]
-    public void CalculatorDivision_DivisionByZero_ThrowsDivisionByZeroError()
+    public void CalculatorDivision_DivisionByZero_ThrowsDivideByZeroError()
     {
         //Arrange
         const double a = 3.0;
-        const double b = 0;
+        const double b = 0.0;
         
         //Act + Assert
         Assert.Throws<DivideByZeroException>(() => Calculator.Division(a, b));
     }
     
-    
-    //Add Equivalence Test Here
+    //Equivalence Test
     
     //preq-UNIT-TEST-7
     [Test]
-    public void CalculatorIsEqual_AEqualsB_ReturnsTrue()
+    public void CalculatorIsEqual_TwoFloatingPointValues_ReturnsTrue()
     {
         //Arrange
         const double a = 0.333333;
         const double b = 0.333333;
         
         //Act
-        bool isTrue = Calculator.IsEqual(a, b);
+        var result = Calculator.IsEqual(a, b);
         
         //Assert
-        Assert.That(isTrue, Is.EqualTo(true));
-        
+        Assert.That(result.Result, Is.EqualTo(1));
     }
     
-    //Raise To Power Test
+    //preq-UNIT-TEST-7A
+    [Test]
+    public void CalculatorIsEqual_TwoFloatingPointValues_ReturnsFalse()
+    {
+        //Arrange 
+        const double a = 0.33333333;
+        const double b = 0.33333334;
+        
+        //Act 
+        var result = Calculator.IsEqual(a, b);
+        
+        //Assert
+        Assert.That(result.Result, Is.EqualTo(0));
+    }
+    
+    //Raise to Power Test
     
     //preq-UNIT-TEST-8
     [Test]
     public void CalculatorPower_RaiseToPower_Power()
     {
         //Arrange
-        var result = new CalculationResult();
         const double a = 2.0;
         const double b = 3.0;
+        const double expected = 8.0;
         
         //Act
-        result.Result = Math.Pow(a, b);
+        var result = Calculator.Power(a, b);
         
         //Assert
-        Assert.That(result.Result, Is.EqualTo(8));
+        Assert.That(result.Result, Is.EqualTo(expected));
     }
-    
     
     //Logarithm Tests
     
@@ -140,21 +146,31 @@ public class CalculatorUnitTests
     public void CalculatorLogarithm_ALogB_Logarithm()
     {
         //Arrange
-        var result = new CalculationResult();
-        const double a = 8;
-        const double b = 2;
+        const double a = 8.0;
+        const double b = 2.0;
         
         //Act
-        result.Result = Math.Log(a, b);
+        var result = Calculator.Logarithm(a, b);
         
         //Assert
         Assert.That(result.Result, Is.EqualTo(3));
     }
-
     
     //preq-UNIT-TEST-10
     [Test]
-    public void CalculatorLogarithm_ALessThanOREqualToZero_ThrowsNaNError()
+    public void CalculatorLogarithm_ALessThanZero_ThrowsNanError()
+    {
+        //Arrange
+        const double a = -3;
+        const double b = 2;
+        
+        //Act + Assert
+        Assert.Throws<NotFiniteNumberException>(() => Calculator.Logarithm(a, b));
+    }
+    
+    //preq-UNIT-TEST-10A
+    [Test]
+    public void CalculatorLogarithm_AEqualToZero_ThrowsNaNError()
     {
         //Arrange
         const double a = 0;
@@ -163,109 +179,104 @@ public class CalculatorUnitTests
         //Act + Assert
         Assert.Throws<NotFiniteNumberException>(() => Calculator.Logarithm(a, b));
     }
-
+    
     //preq-UNIT-TEST-11
     [Test]
     public void CalculatorLogarithm_BEqualsZero_ThrowsNaNError()
     {
         //Arrange
-        const double a = 8;
+        const double a = 8.0;
         const double b = 0;
         
         //Act + Assert
         Assert.Throws<NotFiniteNumberException>(() => Calculator.Logarithm(a, b));
     }
     
-    
     //Root Tests
     
     //preq-UNIT-TEST-12
     [Test]
-    public void CalculatorRoot_BthRootOfA_Root()
+    public void CalculatorRoot_BthRootOfA_ReturnsRoot()
     {
         //Arrange
-        var result = new CalculationResult();
         const double a = 8.0;
         const double b = 3.0;
         
         //Act
-        result.Result = Calculator.Root(a, b);
+        var result = Calculator.Root(a, b);
         
         //Assert
         Assert.That(result.Result, Is.EqualTo(2));
     }
-
+    
     //preq-UNIT-TEST-13
     [Test]
     public void CalculatorRoot_BEqualsZero_ThrowsNaNError()
     {
         //Arrange
-        const double a = 8.0;
+        const double a = 8;
         const double b = 0;
         
         //Act + Assert
         Assert.Throws<NotFiniteNumberException>(() => Calculator.Root(a, b));
     }
     
-    //Factorial Test(s)
+    //Factorial Tests
+    
     
     //preq-UNIT-TEST-14
     [Test]
-    public void CalculatorFactorial_FactorialOfA_Factorial()
+    public void CalculatorFactorial_FactorialOfA_ReturnsFactorial()
     {
         //Arrange
-        var result = new CalculationResult();
-        const double a = 5; 
+        const double a = 5;
         
         //Act
-        result.Result = Calculator.Factorial(a);
+        var result = Calculator.Factorial(a);
         
         //Assert
         Assert.That(result.Result, Is.EqualTo(120));
     }
-
-    //preq-UNIT-TEST-Personal
-    [Test]
-    public void CalculatorFactorial_NegativeFactorialOfA_NegativeFactorial()
-    {
-        //Arrange
-        var result = new CalculationResult();
-        const double a = -5;
-        
-        //Act
-        result.Result = Calculator.Factorial(a);
-        
-        //Assert
-        Assert.That(result.Result, Is.EqualTo(-120));
-    }
-
+    
     //preq-UNIT-TEST-15
     [Test]
-    public void CalculatorFactorial_FactorialOfZero_ReturnsOne()
+    public void CalculatorFactorial_FactorialOf0_ReturnsOne()
     {
         //Arrange
-        var result = new CalculationResult();
         const double a = 0;
         
-        //Act 
-        result.Result = Calculator.Factorial(a);
+        //Act
+        var result = Calculator.Factorial(a);
         
         //Assert
         Assert.That(result.Result, Is.EqualTo(1));
     }
     
-    //Sine Tests
+    //preq-UNIT-TEST-NegativeFactorial
+    [Test]
+    public void CalculatorFactorial_FactorialOfNegativeNumber_ReturnsNegativeFactorial()
+    {
+        //Arrange
+        const double a = -5;
+        
+        //Act
+        var result = Calculator.Factorial(a);
+        
+        //Assert
+        Assert.That(result.Result, Is.EqualTo(-120));
+    }
+    
+    //Sine Test
     
     //preq-UNIT-TEST-16
     [Test]
-    public void CalculatorSine_SineOfA_ReturnsSin()
+    public void CalculatorSine_SineOfA_ReturnsSineValue()
     {
         //Arrange
-        var result = new CalculationResult();
         const double a = 360;
         
         //Act
-        result.Result = Calculator.Sine(a);
+        var result = Calculator.Sine(a);
         
         //Assert
         Assert.That(result.Result, Is.EqualTo(0));
@@ -275,31 +286,28 @@ public class CalculatorUnitTests
     
     //preq-UNIT-TEST-17
     [Test]
-    public void CalculatorCosine_SineOfA_ReturnsCos()
+    public void CalculatorCosine_CosineOfA_ReturnsCosineValue()
     {
         //Arrange
-        var result = new CalculationResult();
         const double a = 360;
         
         //Act
-        result.Result = Calculator.Cosine(a);
+        var result = Calculator.Cosine(a);
         
         //Assert
         Assert.That(result.Result, Is.EqualTo(1));
     }
     
     //Tangent Test
-    
-    //preq-UNIT-TEST-18
     [Test]
-    public void CalculatorTangent_TanOf360_Returns0()
+    //preq-UNIT-TEST-18
+    public void CalculatorTangent_TanOf360_ReturnsTangentValue()
     {
         //Arrange
-        var result = new CalculationResult();
         const double a = 360;
         
         //Act
-        result.Result = Calculator.Tangent(a);
+        var result = Calculator.Tangent(a);
         
         //Assert
         Assert.That(result.Result, Is.EqualTo(0));
@@ -309,30 +317,26 @@ public class CalculatorUnitTests
     
     //preq-UNIT-TEST-19
     [Test]
-    public void CalculatorReciprocal_8_ReturnsOneOverEight()
+    public void CalculatorReciprocal_ReciprocalOfEight_ReturnsOneOverEight()
     {
         //Arrange
-        var result = new CalculationResult();
-        const double a = 8;
+        const double a = 8.0;
         
         //Act
-        result.Result = Calculator.Reciprocal(a);
+        var result = Calculator.Reciprocal(a);
         
         //Assert
-        Assert.That(result.Result, Is.EqualTo(1 / 8));
+        Assert.That(result.Result, Is.EqualTo(0.125));
     }
     
     //preq-UNIT-TEST-20
     [Test]
-    public void CalculatorReciprocal_Zero_ReturnsNaNError()
+    public void CalculatorReciprocal_ReciprocalOfZero_ReturnsNaNError()
     {
         //Arrange
-        const double a = 0;
+        const double a = 0; 
         
         //Act + Assert
         Assert.Throws<NotFiniteNumberException>(() => Calculator.Reciprocal(a));
     }
-    
-    
-
 }
