@@ -1,9 +1,15 @@
 using CalculatorEngine;
-
 namespace CalculatorEngineUnitTests;
 
-public class Tests
+public class Tests()
 {
+    private ICalculatorEngine calculator;
+    [SetUp]
+    public void Setup()
+    {
+        calculator = new Calculator();
+    }
+    
     //Addition Test
     
     //preq-UNIT-TEST-2
@@ -16,7 +22,7 @@ public class Tests
         const double expected = 4.25;
 
         //Act
-        var result = Calculator.Add(a,b);
+        var result = calculator.Add(a, b);
         
         //Assert
         Assert.That(result.Result, Is.EqualTo(expected));
@@ -33,7 +39,7 @@ public class Tests
         const double b = 4;
         const double expected = 23.93;
         //Act
-        var result = Calculator.Subtract(a, b);
+        var result = calculator.Subtract(a, b);
         
         //Assert
         Assert.That(result.Result, Is.EqualTo(expected));
@@ -51,7 +57,7 @@ public class Tests
         const double expected = 35.5;
         
         //Act
-        var result = Calculator.Multiplication(a, b);
+        var result = calculator.Multiplication(a, b);
         
         //Assert
         Assert.That(result.Result, Is.EqualTo(expected));
@@ -69,7 +75,7 @@ public class Tests
         const double expected = 0.33333333;
         
         //Act
-        var result = Calculator.Division(a, b);
+        var result = calculator.Division(a, b);
         result.Result = Math.Round(result.Result, 8);
         
         //Assert
@@ -86,7 +92,7 @@ public class Tests
         const double b = 0.0;
         
         //Act + Assert
-        Assert.Throws<DivideByZeroException>(() => Calculator.Division(a, b));
+        Assert.Throws<DivideByZeroException>(() => calculator.Division(a, b));
     }
     
     //Equivalence Test
@@ -100,7 +106,7 @@ public class Tests
         const double b = 0.333333;
         
         //Act
-        var result = Calculator.IsEqual(a, b);
+        var result = calculator.Equals(a, b);
         
         //Assert
         Assert.That(result.Result, Is.EqualTo(1));
@@ -115,7 +121,7 @@ public class Tests
         const double b = 0.33333334;
         
         //Act 
-        var result = Calculator.IsEqual(a, b);
+        var result = calculator.Equals(a, b);
         
         //Assert
         Assert.That(result.Result, Is.EqualTo(0));
@@ -133,7 +139,7 @@ public class Tests
         const double expected = 8.0;
         
         //Act
-        var result = Calculator.Power(a, b);
+        var result = calculator.Power(a, b);
         
         //Assert
         Assert.That(result.Result, Is.EqualTo(expected));
@@ -150,7 +156,7 @@ public class Tests
         const double b = 2.0;
         
         //Act
-        var result = Calculator.Logarithm(a, b);
+        var result = calculator.Logarithm(a, b);
         
         //Assert
         Assert.That(result.Result, Is.EqualTo(3));
@@ -165,7 +171,7 @@ public class Tests
         const double b = 2;
         
         //Act + Assert
-        Assert.Throws<NotFiniteNumberException>(() => Calculator.Logarithm(a, b));
+        Assert.Throws<NotFiniteNumberException>(() => calculator.Logarithm(a, b));
     }
     
     //preq-UNIT-TEST-10A
@@ -177,7 +183,7 @@ public class Tests
         const double b = 2;
         
         //Act + Assert
-        Assert.Throws<NotFiniteNumberException>(() => Calculator.Logarithm(a, b));
+        Assert.Throws<NotFiniteNumberException>(() => calculator.Logarithm(a, b));
     }
     
     //preq-UNIT-TEST-11
@@ -189,7 +195,7 @@ public class Tests
         const double b = 0;
         
         //Act + Assert
-        Assert.Throws<NotFiniteNumberException>(() => Calculator.Logarithm(a, b));
+        Assert.Throws<NotFiniteNumberException>(() => calculator.Logarithm(a, b));
     }
     
     //Root Tests
@@ -203,7 +209,7 @@ public class Tests
         const double b = 3.0;
         
         //Act
-        var result = Calculator.Root(a, b);
+        var result = calculator.Root(a, b);
         
         //Assert
         Assert.That(result.Result, Is.EqualTo(2));
@@ -218,7 +224,7 @@ public class Tests
         const double b = 0;
         
         //Act + Assert
-        Assert.Throws<NotFiniteNumberException>(() => Calculator.Root(a, b));
+        Assert.Throws<NotFiniteNumberException>(() => calculator.Root(a, b));
     }
     
     //Factorial Tests
@@ -232,7 +238,7 @@ public class Tests
         const double a = 5;
         
         //Act
-        var result = Calculator.Factorial(a);
+        var result = calculator.Factorial(a);
         
         //Assert
         Assert.That(result.Result, Is.EqualTo(120));
@@ -246,7 +252,7 @@ public class Tests
         const double a = 0;
         
         //Act
-        var result = Calculator.Factorial(a);
+        var result = calculator.Factorial(a);
         
         //Assert
         Assert.That(result.Result, Is.EqualTo(1));
@@ -260,7 +266,7 @@ public class Tests
         const double a = -5;
         
         //Act
-        var result = Calculator.Factorial(a);
+        var result = calculator.Factorial(a);
         
         //Assert
         Assert.That(result.Result, Is.EqualTo(-120));
@@ -276,7 +282,7 @@ public class Tests
         const double a = 360;
         
         //Act
-        var result = Calculator.Sine(a);
+        var result = calculator.Sine(a);
         
         //Assert
         Assert.That(result.Result, Is.EqualTo(0));
@@ -292,7 +298,7 @@ public class Tests
         const double a = 360;
         
         //Act
-        var result = Calculator.Cosine(a);
+        var result = calculator.Cosine(a);
         
         //Assert
         Assert.That(result.Result, Is.EqualTo(1));
@@ -307,7 +313,7 @@ public class Tests
         const double a = 360;
         
         //Act
-        var result = Calculator.Tangent(a);
+        var result = calculator.Tangent(a);
         
         //Assert
         Assert.That(result.Result, Is.EqualTo(0));
@@ -323,7 +329,7 @@ public class Tests
         const double a = 8.0;
         
         //Act
-        var result = Calculator.Reciprocal(a);
+        var result = calculator.Reciprocal(a);
         
         //Assert
         Assert.That(result.Result, Is.EqualTo(0.125));
@@ -337,6 +343,6 @@ public class Tests
         const double a = 0; 
         
         //Act + Assert
-        Assert.Throws<NotFiniteNumberException>(() => Calculator.Reciprocal(a));
+        Assert.Throws<NotFiniteNumberException>(() => calculator.Reciprocal(a));
     }
 }

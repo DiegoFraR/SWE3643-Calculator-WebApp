@@ -1,11 +1,11 @@
 ﻿namespace CalculatorEngine;
 
-public class Calculator
+public class Calculator : ICalculatorEngine
 {
     private static readonly CalculationResult Result= new CalculationResult();
     
     //Addition
-    public static CalculationResult Add(double a, double b)
+    public CalculationResult Add(double a, double b)
     {
         Result.Result = a + b;
         Result.Operation = a + " + " + b;
@@ -15,7 +15,7 @@ public class Calculator
     }
 
     //Subtraction
-    public static CalculationResult Subtract(double a, double b)
+    public CalculationResult Subtract(double a, double b)
     {
         Result.Result = a - b;
         Result.Operation = a + " - " + b;
@@ -24,7 +24,7 @@ public class Calculator
     }
 
     //Multiplication
-    public static CalculationResult Multiplication(double a, double b)
+    public CalculationResult Multiplication(double a, double b)
     {
         Result.Result = a * b;
         Result.Error = "";
@@ -35,7 +35,7 @@ public class Calculator
     }
 
     //Division
-    public static CalculationResult Division(double a, double b)
+    public CalculationResult Division(double a, double b)
     {
         if (b == 0)
         {
@@ -53,7 +53,7 @@ public class Calculator
     }
     
     //Equivalence
-    public static CalculationResult IsEqual(double a, double b)
+    public CalculationResult Equals(double a, double b)
     {
         if (Math.Abs(a - b) < 0.000000001)
         {
@@ -72,7 +72,7 @@ public class Calculator
     }
     
     //Raise To Power
-    public static CalculationResult Power(double a, double b)
+    public CalculationResult Power(double a, double b)
     {
         Result.Result = Math.Pow(a, b);
         Result.Operation = a + " ^ " + b;
@@ -81,7 +81,7 @@ public class Calculator
     }
     
     //Logarithm
-    public static CalculationResult Logarithm(double a, double b)
+    public CalculationResult Logarithm(double a, double b)
     {
         switch (a)
         {
@@ -109,7 +109,7 @@ public class Calculator
     }
     
     //Root
-    public static CalculationResult Root(double a, double b)
+    public CalculationResult Root(double a, double b)
     {
         if (b == 0)
         {
@@ -128,7 +128,7 @@ public class Calculator
     }
     
     //Factorial
-    public static CalculationResult Factorial(double a)
+    public CalculationResult Factorial(double a)
     {
         if (a == 0)
         {
@@ -174,7 +174,7 @@ public class Calculator
     }
     
     //Sine
-    public static CalculationResult Sine(double a)
+    public CalculationResult Sine(double a)
     {
         a = ConvertToRadians(a);
         Result.Result = Math.Round(Math.Sin(a), 0);
@@ -191,7 +191,7 @@ public class Calculator
     }
     
     //Cosine
-    public static CalculationResult Cosine(double a)
+    public CalculationResult Cosine(double a)
     {
         a = ConvertToRadians(a);
         Result.Result = Math.Round(Math.Cos(a), 0);
@@ -201,7 +201,7 @@ public class Calculator
     }
     
     //Tangent
-    public static CalculationResult Tangent(double a)
+    public CalculationResult Tangent(double a)
     {
         a = ConvertToRadians(a);
         Result.Result = Math.Round(Math.Tan(a), 0);
@@ -211,7 +211,7 @@ public class Calculator
     }
     
     //Reciprocal
-    public static CalculationResult Reciprocal(double a)
+    public CalculationResult Reciprocal(double a)
     {
         if (a == 0)
         {

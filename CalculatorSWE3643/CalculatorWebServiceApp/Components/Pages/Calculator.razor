@@ -1,0 +1,18 @@
+﻿@page "/Calculator"
+@{
+    var calculatorModel = new CalculatorWebServiceApp.Components.CalculatorModel();
+}
+
+<h3>Calculator</h3>
+
+<form name="Add" asp-controller="Calculator" asp-action="Add" method="post">
+    <input type="number" name="A"/>
+    <span>A + B</span>
+    <input type="number" name="B"/>
+    <input type="submit" value="Calculate"/>
+    <AntiforgeryToken></AntiforgeryToken>
+</form>
+
+<div>
+   @calculatorModel.Result
+</div>

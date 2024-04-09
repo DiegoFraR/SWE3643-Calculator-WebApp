@@ -1,5 +1,8 @@
-﻿@page "/"
-
+﻿@{
+    object model = typeof(CalculatorModel);
+}
+@model
+@page "/"
 <PageTitle>Calculator</PageTitle>
   
 <head> 
@@ -44,24 +47,23 @@
     <!-- Create table -->
     <table id="calcu"> 
         <tr> 
-            <th><font size="6">Calculator</font></th> 
+            <th>Calculator</th> 
             <td><button class="button" id="clear">Clear</button></td>
         </tr> 
         
         <tr> 
-            <th colspan="2" bgcolor="#BEDEE2">
-                <font size="4">Enter value(s) below and select an operation.</font>
+            <th colspan="2">
+                Enter value(s) below and select an operation.
             </th> 
         </tr> 
-        
         <tr> 
             <th>Input A</th> 
             <th>Input B</th> 
         </tr> 
         
         <tr> 
-            <td colspan="1"> 
-                <input type="text" id="aInput"> 
+            <td colspan="1">
+                <input type="text" id="aInput">
             </td> 
             <td colspan="1">
                  <input type="text" id="bInput">
