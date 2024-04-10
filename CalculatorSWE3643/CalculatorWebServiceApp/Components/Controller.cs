@@ -5,11 +5,11 @@ namespace CalculatorWebServiceApp.Components;
 
 [ApiController]
 [Route("[controller]")]
-public class CalculatorController : Controller
+public class Controller : Microsoft.AspNetCore.Mvc.Controller
 {
     private readonly ICalculatorEngine _engine;
 
-    public CalculatorController(ICalculatorEngine calculatorEngine)
+    public Controller(ICalculatorEngine calculatorEngine)
     {
         _engine = calculatorEngine;
     }
@@ -34,6 +34,7 @@ public class CalculatorController : Controller
         var result = _engine.Multiplication(a, b);
         return result;
     }
+    
     
     [HttpGet("division")]
     public CalculationResult Division(double a, double b)
