@@ -77,26 +77,42 @@
 
     private void Clear()
     {
+        Result = null;
         InputA = 0;
         InputB = 0;
-        Result.Result = 0;
     }
 }
 <h3>Calculator</h3>
 <button @onclick ="Clear">Clear</button>
-
-
+<ErrorBoundary>
+    @switch (Result)
+    {
+        case { IsSuccess: true }:
+        {
+            <div>
+                <h4>Result:</h4>
+                <p>@Result.Result</p>
+                @if (!Result.IsSuccess)
+                {
+                    <p>Error: @Result.Error</p>
+                }
+            </div>
+            break;
+        }
+        case { IsSuccess: false }:
+            <div>
+                <p>Invalid Input: </p>
+                <p>@Result.Error</p>
+        </div>
+            break;
+        default:
+            <div>
+            <p>Enter values(s) below and select an operation.</p>
+        </div>
+            break;
+    }
+</ErrorBoundary>
 <table id="Calcualtor">
-    <tr>
-        <th>Calculator</th>
-        <td><button @onclick="Clear">Clear</button></td>
-    </tr>
-    
-    <tr>
-        <th colspan="2">
-            Enter value(s) below and select an operation.
-        </th>
-    </tr>
     <tr>
         <th>Input A</th>
         <th>Input B</th>
@@ -104,10 +120,10 @@
     
     <tr>
         <td colspan="1">
-            <input id="A" type="text" @bind="InputA"/>
+            <input id="A" type="number" @bind="InputA"/>
         </td>
         <td colspan="1">
-            <input id="B" type="text" @Bind="InputB"/>
+            <input id="B" type="number" @bind="InputB"/>
         </td>
     </tr>
     
@@ -118,51 +134,20 @@
     
     <tr>
         <td><button @onclick="CalculatorAdd" class="button">A + B</button></td>
+        <td><button @onclick="CalculatorSubtract" class="button">A - B</button></td>
+        <td><button @onclick="CalculatorMultiplication" class="button">A * B</button></td>
+        <td><button @onclick="CalculatorDivision" class="button">A / B</button></td>
+        <td><button @onclick="CalculatorEquals" class="button">A == B</button></td>
+        <td><button @onclick="CalculatorPower" class="button">A ^ B</button></td>
+        <td><button @onclick="CalculatorLogarithm" class="button">A log B</button></td>
+        <td><button @onclick="CalculatorRoot" class="button">A root B</button></td>
     </tr>
+    <tr>
+        <td><button @onclick="CalculatorFactorial" class="button">A !</button></td>
+        <td><button @onclick="CalculatorSine" class="button">sin A</button></td>
+        <td><button @onclick="CalculatorCosine" class="button">cos A</button></td>
+        <td><button @onclick="CalculatorTangent" class="button">tan A</button></td>
+        <td><button @onclick="CalculatorReciprocal" class="button">1 / A</button></td>
+    </tr>
+    
 </table>
-
-<div>
-    
-</div>
-
-
-<div>
-    <label for="A">Input A:</label>
-    <input id="A" type="number" @bind="InputA" />
-    
-    <label for="B">Input B: </label>
-    <input id="B" type="number" @bind="InputB" />
-    
-    <div>
-        <label>A & B</label>
-        <button @onclick="CalculatorAdd">A + B</button>
-        <button @onclick="CalculatorSubtract">A - B</button>
-        <button @onclick="CalculatorMultiplication">A x B</button>
-        <button @onclick="CalculatorDivision">A / B</button>
-        <button @onclick="CalculatorEquals">A == B</button>
-        <button @onclick="CalculatorPower">A ^ B</button>
-        <button @onclick="CalculatorLogarithm">A log B</button>
-        <button @onclick="CalculatorRoot">A root B</button>
-    </div>
-    
-    <div>
-        <label>A Only</label>
-        <button @onclick="CalculatorFactorial">A!</button>
-        <button @onclick="CalculatorSine">Sin A</button>
-        <button @onclick="CalculatorCosine">Cos A</button>
-        <button @onclick="CalculatorTangent">Tan A</button>
-        <button @onclick="CalculatorReciprocal">1 / A</button>
-    </div>
-</div>
-
-@if (Result != null)
-{
-    <div>
-        <h4>Result:</h4>
-        <p>@Result.Result</p>
-        @if (!Result.IsSuccess)
-        {
-            <p>Error: @Result.Error</p>
-        }
-    </div>
-}
