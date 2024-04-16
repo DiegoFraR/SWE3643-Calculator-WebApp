@@ -1,5 +1,6 @@
 @page "/"
 @rendermode InteractiveServer
+<PageTitle>Calculator</PageTitle>
 
 @using CalculatorEngine
 @code
@@ -82,36 +83,150 @@
         InputB = 0;
     }
 }
-<h3>Calculator</h3>
-<button @onclick ="Clear">Clear</button>
-<ErrorBoundary>
-    @switch (Result)
-    {
-        case { IsSuccess: true }:
-        {
-            <div>
-                <h4>Result:</h4>
-                <p>@Result.Result</p>
-                @if (!Result.IsSuccess)
-                {
-                    <p>Error: @Result.Error</p>
+
+<head>
+    <Title>Calculator Web App</Title>
+    <style>
+        table { 
+                    margin-left: auto; 
+                    margin-right: auto; 
+                } 
+                  
+                .button { 
+                    width: 100%; 
+                    padding: 10px 20px; 
+                    background-color: #2792a1; 
+                    color: #ffffff; 
+                    font-size: 15px; 
+                    font-weight: bold; 
+                    border: none; 
+                    border-radius: 5px;
+                } 
+                
+                .button:hover{
+                    background-color: #144750; 
                 }
-            </div>
-            break;
-        }
-        case { IsSuccess: false }:
-            <div>
-                <p>Invalid Input: </p>
-                <p>@Result.Error</p>
-        </div>
-            break;
-        default:
-            <div>
-            <p>Enter values(s) below and select an operation.</p>
-        </div>
-            break;
-    }
-</ErrorBoundary>
+                  
+                th,
+                 td{ 
+                    padding: 10px 15px; 
+                    font-size: 15px; 
+                    font-weight: bold; 
+                    border: none; 
+                    border-radius: 5px; 
+                    //border: 2px solid black;
+                    text-align: left;
+                } 
+    </style>
+</head>
+
+<body>
+    <table id="calcu">
+        <tr>
+            <th>Calculator</th>
+            <td><button @onclick ="Clear" class="button">Clear</button></td>
+        </tr>
+        
+        <tr>
+            <th colspan="2">
+                <ErrorBoundary>
+                    @switch (Result)
+                    {
+                        case { IsSuccess: true }:
+                        {
+                            <div>
+                                <h4>Result:</h4>
+                                <p>@Result.Result</p>
+                                @if (!Result.IsSuccess)
+                                {
+                                    <p>Error: @Result.Error</p>
+                                }
+                            </div>
+                            break;
+                        }
+                        case { IsSuccess: false }:
+                            <div>
+                                <p>Invalid Input: </p>
+                                <p>@Result.Error</p>
+                            </div>
+                            break;
+                        default:
+                            <div>
+                                <p>Enter values(s) below and select an operation.</p>
+                            </div>
+                            break;
+                    }
+                </ErrorBoundary>
+            </th>
+        </tr>
+        <tr>
+            <th>Input A</th>
+            <th>Input B</th>
+        </tr>
+        
+        <tr>
+            <td colspan="1">
+                <input id="A" type="number" @bind="InputA"/>
+            </td>
+            <td colspan="1">
+                <input id="B" type="number" @bind="InputB"/>
+            </td>
+        </tr>
+        
+        <tr>
+            <th>A and B</th>
+            <th>A Only</th>
+        </tr>
+        
+        <tr>
+            <td><button @onclick="CalculatorAdd" class="button">A + B</button></td>
+            <td><button @onclick="CalculatorFactorial" class="button">A !</button></td>
+        </tr>
+        <tr>
+            <td><button @onclick="CalculatorSubtract" class="button">A - B</button></td>
+            <td><button @onclick="CalculatorSine" class="button">sin A</button></td>
+        </tr>
+        <tr>
+            <td><button @onclick="CalculatorMultiplication" class="button">A * B</button></td>
+            <td><button @onclick="CalculatorCosine" class="button">cos A</button></td>
+        </tr>
+        <tr>
+            <td><button @onclick="CalculatorDivision" class="button">A / B</button></td>
+            <td><button @onclick="CalculatorTangent" class="button">tan A</button></td>
+        </tr>
+        <tr>
+            <td><button @onclick="CalculatorEquals" class="button">A == B</button></td>
+            <td><button @onclick="CalculatorReciprocal" class="button">1 / A</button></td>
+        </tr>
+        <tr>
+            <td><button @onclick="CalculatorPower" class="button">A ^ B</button></td>
+        </tr>
+        <tr>
+            <td><button @onclick="CalculatorLogarithm" class="button">A log B</button></td>
+        </tr>
+        <tr>
+            <td><button @onclick="CalculatorRoot" class="button">A root B</button></td>
+        </tr>
+    </table>
+</body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--
 <table id="Calcualtor">
     <tr>
         <th>Input A</th>
@@ -149,5 +264,4 @@
         <td><button @onclick="CalculatorTangent" class="button">tan A</button></td>
         <td><button @onclick="CalculatorReciprocal" class="button">1 / A</button></td>
     </tr>
-    
-</table>
+</table>-->

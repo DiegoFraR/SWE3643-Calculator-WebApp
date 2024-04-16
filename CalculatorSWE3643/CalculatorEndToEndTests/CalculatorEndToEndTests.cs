@@ -27,4 +27,16 @@ public class Tests : PageTest
         // Expects the URL to contain intro.
         await Expect(Page).ToHaveURLAsync(new Regex(".*intro"));
     }
+
+    [Test]
+    public async Task CalculatorWebUi_PageTitle_IsCalculator()
+    {
+        //Arrange
+        const string pageTitle = "Calculator";
+        //Act
+        await Page.GotoAsync("http://localhost:5093/");
+        //Assert
+        await Expect(Page).ToHaveTitleAsync(pageTitle);
+    }
+    
 }
