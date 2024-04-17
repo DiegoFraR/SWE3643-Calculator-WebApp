@@ -1,16 +1,42 @@
 # SWE3643-Calculator-WebApp
-# Table of Contents
-- Source code of our Web-Based Calculator
-- [Instructions on Building and Executing the Application from the Command Line](#how-to-build-and-execute-the-application)
+## KSU SWE 3643 Software Testing and Quality Assurance Semester Project: Web-Based Calculator
+This repository contains our semester-long project for our *SWE 3643 Quality Assurance Course*.
+We designed a simple __Web-Based Calculator__ in C# using Blazor Server, wrote unit tests using NUnit, and wrote end-to-end tests using Playwright with NUnit.
+## Table of Contents
+- [Team Members](#team-members)
+- [Architecture](#architecture)
+- [Environment](#environment)
+- [Executing the Web Application](#executing-the-web-application)
+- [Executing Unit Tests](#executing-unit-tests)
+- [Reviewing Unit Test Coverage](#reviewing-unit-test-coverage)
+- [Executing End-To-End Tests](#executing-end-to-end-tests)
 - [Final Video Presentation](#final-video-presentation)
-## Summary of Project
-This repository contains our semester-long project for our *SWE 3643 Quality Assurance Course*. We designed a simple __Web-Based Calculator__ and wrote several Unit Tests using NUnit for sever-side. In Particular, this repository consists of the following:
-* Source code of our Web-Based Calculator
-* Source code for our NUnit Tests
-* Source code for our Playwright Tests
-* Instructions on Building and Executing the Application from the Command Line, including all Environment Dependencies
-* Final Video Presentation
-## How to Build and Execute the Application
-#### From the Command Line
-## How to Execute Unit Tests and Playwright Tests from the Command Line
+
+## Team Members
+- [Diego Frausto Ramirez](https://github.com/DiegoFraR)
+- [Victoria Miller](https://github.com/vjr98) 
+
+## Architecture
+
+## Environment
+This is a cross-platform application and should work in Windows 10+, Mac-OS Ventura+, and linux environments.
+
+
+To Prepare your environment to execute this application:
+1. [Install the latest .NET for your system](https://dotnet.microsoft.com/en-us/download/dotnet/8.0)
+
+To configure Playwright for End-To-End Testing:
+1. [Install Playwright to the folder with this project.](https://playwright.dev/docs/intro)
+
+## Executing the Web Application
+
+## Executing Unit Tests
+
+
+## Reviewing Unit Test Coverage
+
+## Executing End-To-End Tests
+
 ## Final Video Presentation
+- [Final Presentation Video]()
+
