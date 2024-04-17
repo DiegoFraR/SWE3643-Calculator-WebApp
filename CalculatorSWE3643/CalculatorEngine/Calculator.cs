@@ -41,7 +41,7 @@ public class Calculator : ICalculatorEngine
         {
             Result.Error = "Cannot Divide by 0";
             Result.IsSuccess = false;
-            throw new DivideByZeroException();
+            return Result;
         }
         else
         {
@@ -87,8 +87,8 @@ public class Calculator : ICalculatorEngine
         {
             case <= 0:
                 Result.IsSuccess = false;
-                Result.Error = "Value of A cannot be equal to or less than 0!";
-                throw new NotFiniteNumberException();
+                Result.Error = "Value of A cannot be equal to or less than 0!"; 
+                return Result;
             default:
             {
                 switch (b)
@@ -96,7 +96,7 @@ public class Calculator : ICalculatorEngine
                     case 0:
                         Result.IsSuccess = false;
                         Result.Error = "Value of B cannot equal 0!";
-                        throw new NotFiniteNumberException();
+                        return Result;
                     default:
                         Result.Result = Math.Log(a, b);
                         Result.Operation = a + " log " + b;
@@ -115,7 +115,7 @@ public class Calculator : ICalculatorEngine
         {
             Result.IsSuccess = false;
             Result.Error = "Value of B cannot be 0!";
-            throw new NotFiniteNumberException();
+            return Result;
         }
         else
         {
@@ -217,7 +217,7 @@ public class Calculator : ICalculatorEngine
         {
             Result.IsSuccess = false;
             Result.Error = "Cannot Divide by 0!";
-            throw new NotFiniteNumberException();
+            return Result;
         }
         else
         {

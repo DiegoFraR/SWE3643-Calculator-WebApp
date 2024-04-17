@@ -1,13 +1,13 @@
 using CalculatorEngine;
 namespace CalculatorEngineUnitTests;
 
-public class Tests()
+public class Tests
 {
-    private ICalculatorEngine calculator;
+    private ICalculatorEngine _calculator;
     [SetUp]
     public void Setup()
     {
-        calculator = new Calculator();
+        _calculator = new Calculator();
     }
     
     //Addition Test
@@ -22,7 +22,7 @@ public class Tests()
         const double expected = 4.25;
 
         //Act
-        var result = calculator.Add(a, b);
+        var result = _calculator.Add(a, b);
         
         //Assert
         Assert.That(result.Result, Is.EqualTo(expected));
@@ -39,7 +39,7 @@ public class Tests()
         const double b = 4;
         const double expected = 23.93;
         //Act
-        var result = calculator.Subtract(a, b);
+        var result = _calculator.Subtract(a, b);
         
         //Assert
         Assert.That(result.Result, Is.EqualTo(expected));
@@ -57,7 +57,7 @@ public class Tests()
         const double expected = 35.5;
         
         //Act
-        var result = calculator.Multiplication(a, b);
+        var result = _calculator.Multiplication(a, b);
         
         //Assert
         Assert.That(result.Result, Is.EqualTo(expected));
@@ -75,7 +75,7 @@ public class Tests()
         const double expected = 0.33333333;
         
         //Act
-        var result = calculator.Division(a, b);
+        var result = _calculator.Division(a, b);
         result.Result = Math.Round(result.Result, 8);
         
         //Assert
@@ -85,14 +85,19 @@ public class Tests()
     
     //preq-UNIT-TEST-6
     [Test]
-    public void CalculatorDivision_DivisionByZero_ThrowsDivideByZeroError()
+    public void CalculatorDivision_DivisionByZero_ThrowsDivideByZeroErrorMessage()
     {
         //Arrange
         const double a = 3.0;
         const double b = 0.0;
+        const string expected = "Cannot Divide by 0";
         
-        //Act + Assert
-        Assert.Throws<DivideByZeroException>(() => calculator.Division(a, b));
+        //Act
+        var result = _calculator.Division(a, b);
+        
+        //Assert
+        Assert.That(result.Error, Is.EqualTo(expected));
+        
     }
     
     //Equivalence Test
@@ -106,7 +111,7 @@ public class Tests()
         const double b = 0.333333;
         
         //Act
-        var result = calculator.Equals(a, b);
+        var result = _calculator.Equals(a, b);
         
         //Assert
         Assert.That(result.Result, Is.EqualTo(1));
@@ -121,7 +126,7 @@ public class Tests()
         const double b = 0.33333334;
         
         //Act 
-        var result = calculator.Equals(a, b);
+        var result = _calculator.Equals(a, b);
         
         //Assert
         Assert.That(result.Result, Is.EqualTo(0));
@@ -139,7 +144,7 @@ public class Tests()
         const double expected = 8.0;
         
         //Act
-        var result = calculator.Power(a, b);
+        var result = _calculator.Power(a, b);
         
         //Assert
         Assert.That(result.Result, Is.EqualTo(expected));
@@ -156,7 +161,7 @@ public class Tests()
         const double b = 2.0;
         
         //Act
-        var result = calculator.Logarithm(a, b);
+        var result = _calculator.Logarithm(a, b);
         
         //Assert
         Assert.That(result.Result, Is.EqualTo(3));
@@ -164,14 +169,18 @@ public class Tests()
     
     //preq-UNIT-TEST-10
     [Test]
-    public void CalculatorLogarithm_ALessThanZero_ThrowsNanError()
+    public void CalculatorLogarithm_ALessThanZero_ThrowsNanErrorMessage()
     {
         //Arrange
         const double a = -3;
         const double b = 2;
+        const string expected = "Value of A cannot be equal to or less than 0!";
         
-        //Act + Assert
-        Assert.Throws<NotFiniteNumberException>(() => calculator.Logarithm(a, b));
+        //Act
+        var result = _calculator.Logarithm(a, b);
+        //Assert
+        Assert.That(result.Error, Is.EqualTo(expected));
+
     }
     
     //preq-UNIT-TEST-10A
@@ -181,9 +190,12 @@ public class Tests()
         //Arrange
         const double a = 0;
         const double b = 2;
+        const string expected = "Value of A cannot be equal to or less than 0!";
         
-        //Act + Assert
-        Assert.Throws<NotFiniteNumberException>(() => calculator.Logarithm(a, b));
+        //Act
+        var result = _calculator.Logarithm(a, b);
+        //Assert
+        Assert.That(result.Error, Is.EqualTo(expected));
     }
     
     //preq-UNIT-TEST-11
@@ -193,9 +205,13 @@ public class Tests()
         //Arrange
         const double a = 8.0;
         const double b = 0;
+        const string expected = "Value of B cannot equal 0!";
         
-        //Act + Assert
-        Assert.Throws<NotFiniteNumberException>(() => calculator.Logarithm(a, b));
+        //Act
+        var result = _calculator.Logarithm(a, b);
+        
+        //Assert
+        Assert.That(result.Error, Is.EqualTo(expected));
     }
     
     //Root Tests
@@ -209,7 +225,7 @@ public class Tests()
         const double b = 3.0;
         
         //Act
-        var result = calculator.Root(a, b);
+        var result = _calculator.Root(a, b);
         
         //Assert
         Assert.That(result.Result, Is.EqualTo(2));
@@ -222,9 +238,13 @@ public class Tests()
         //Arrange
         const double a = 8;
         const double b = 0;
+        const string expected = "Value of B cannot be 0!";
         
-        //Act + Assert
-        Assert.Throws<NotFiniteNumberException>(() => calculator.Root(a, b));
+        //Act
+        var result = _calculator.Root(a, b);
+        
+        //Assert
+        Assert.That(result.Error, Is.EqualTo(expected));
     }
     
     //Factorial Tests
@@ -238,7 +258,7 @@ public class Tests()
         const double a = 5;
         
         //Act
-        var result = calculator.Factorial(a);
+        var result = _calculator.Factorial(a);
         
         //Assert
         Assert.That(result.Result, Is.EqualTo(120));
@@ -252,7 +272,7 @@ public class Tests()
         const double a = 0;
         
         //Act
-        var result = calculator.Factorial(a);
+        var result = _calculator.Factorial(a);
         
         //Assert
         Assert.That(result.Result, Is.EqualTo(1));
@@ -266,7 +286,7 @@ public class Tests()
         const double a = -5;
         
         //Act
-        var result = calculator.Factorial(a);
+        var result = _calculator.Factorial(a);
         
         //Assert
         Assert.That(result.Result, Is.EqualTo(-120));
@@ -282,7 +302,7 @@ public class Tests()
         const double a = 360;
         
         //Act
-        var result = calculator.Sine(a);
+        var result = _calculator.Sine(a);
         
         //Assert
         Assert.That(result.Result, Is.EqualTo(0));
@@ -298,7 +318,7 @@ public class Tests()
         const double a = 360;
         
         //Act
-        var result = calculator.Cosine(a);
+        var result = _calculator.Cosine(a);
         
         //Assert
         Assert.That(result.Result, Is.EqualTo(1));
@@ -313,7 +333,7 @@ public class Tests()
         const double a = 360;
         
         //Act
-        var result = calculator.Tangent(a);
+        var result = _calculator.Tangent(a);
         
         //Assert
         Assert.That(result.Result, Is.EqualTo(0));
@@ -329,7 +349,7 @@ public class Tests()
         const double a = 8.0;
         
         //Act
-        var result = calculator.Reciprocal(a);
+        var result = _calculator.Reciprocal(a);
         
         //Assert
         Assert.That(result.Result, Is.EqualTo(0.125));
@@ -340,9 +360,12 @@ public class Tests()
     public void CalculatorReciprocal_ReciprocalOfZero_ReturnsNaNError()
     {
         //Arrange
-        const double a = 0; 
+        const double a = 0;
+        const string expected = "Cannot Divide by 0!";
         
+        //Act
+        var result = _calculator.Reciprocal(a);
         //Act + Assert
-        Assert.Throws<NotFiniteNumberException>(() => calculator.Reciprocal(a));
+        Assert.That(result.Error, Is.EqualTo(expected));
     }
 }

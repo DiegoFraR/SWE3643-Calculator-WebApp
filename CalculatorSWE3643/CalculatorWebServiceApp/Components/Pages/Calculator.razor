@@ -5,82 +5,83 @@
 @using CalculatorEngine
 @code
 {
-    private double InputA;
-    private double InputB;
-    private CalculationResult? Result;
-    private ICalculatorEngine _calculatorEngine = new CalculatorEngine.Calculator();
+    
+    private double _inputA;
+    private double _inputB;
+    private CalculationResult? _result;
+    private readonly ICalculatorEngine _calculatorEngine = new CalculatorEngine.Calculator();
     
 
     private void CalculatorAdd()
     {
-        Result = _calculatorEngine.Add(InputA, InputB);
+        _result = _calculatorEngine.Add(_inputA, _inputB);
     }
 
     private void CalculatorSubtract()
     {
-        Result = _calculatorEngine.Subtract(InputA, InputB);
+        _result = _calculatorEngine.Subtract(_inputA, _inputB);
     }
 
     private void CalculatorMultiplication()
     {
-        Result = _calculatorEngine.Multiplication(InputA, InputB);
+        _result = _calculatorEngine.Multiplication(_inputA, _inputB);
     }
 
     private void CalculatorDivision()
     {
-        Result = _calculatorEngine.Division(InputA, InputB);
+        _result = _calculatorEngine.Division(_inputA, _inputB);
     }
 
     private void CalculatorEquals()
     {
-        Result = _calculatorEngine.Equals(InputA, InputB);
+        _result = _calculatorEngine.Equals(_inputA, _inputB);
     }
 
     private void CalculatorPower()
     {
-        Result = _calculatorEngine.Power(InputA, InputB);
+        _result = _calculatorEngine.Power(_inputA, _inputB);
     }
 
     private void CalculatorLogarithm()
     {
-        Result = _calculatorEngine.Logarithm(InputA, InputB);
+        _result = _calculatorEngine.Logarithm(_inputA, _inputB);
     }
 
     private void CalculatorRoot()
     {
-        Result = _calculatorEngine.Root(InputA, InputB);
+        _result = _calculatorEngine.Root(_inputA, _inputB);
     }
 
     private void CalculatorFactorial()
     {
-        Result = _calculatorEngine.Factorial(InputA);
+        _result = _calculatorEngine.Factorial(_inputA);
     }
 
     private void CalculatorSine()
     {
-        Result = _calculatorEngine.Sine(InputA);
+        _result = _calculatorEngine.Sine(_inputA);
     }
 
     private void CalculatorCosine()
     {
-        Result = _calculatorEngine.Cosine(InputA);
+        _result = _calculatorEngine.Cosine(_inputA);
     }
 
     private void CalculatorTangent()
     {
-        Result = _calculatorEngine.Tangent(InputA);
+        _result = _calculatorEngine.Tangent(_inputA);
     }
 
     private void CalculatorReciprocal()
     {
-        Result = _calculatorEngine.Reciprocal(InputA);
+        _result = _calculatorEngine.Reciprocal(_inputA);
     }
 
     private void Clear()
     {
-        Result = null;
-        InputA = 0;
-        InputB = 0;
+        _result = null;
+        _inputA = 0;
+        _inputB = 0;
     }
 }
 
@@ -129,34 +130,30 @@
         
         <tr>
             <th colspan="2">
-                <ErrorBoundary>
-                    @switch (Result)
+                @switch (_result)
+                {
+                    case { IsSuccess: true }:
                     {
-                        case { IsSuccess: true }:
-                        {
-                            <div>
-                                <h4>Result:</h4>
-                                <p>@Result.Result</p>
-                                @if (!Result.IsSuccess)
-                                {
-                                    <p>Error: @Result.Error</p>
-                                }
-                            </div>
-                            break;
+                        <div>
+                            <h4>Result:</h4>
+                            <p>@_result.Result</p>
+                            <p>@_result.IsSuccess</p>
+                            @if (!_result.IsSuccess) {
+                                <p>Error: @_result.Error</p>
+                            }
+                        </div> break;
                         }
-                        case { IsSuccess: false }:
-                            <div>
-                                <p>Invalid Input: </p>
-                                <p>@Result.Error</p>
-                            </div>
-                            break;
-                        default:
-                            <div>
-                                <p>Enter values(s) below and select an operation.</p>
-                            </div>
-                            break;
+                    case { IsSuccess: false }:
+                        <div>
+                            <p>Invalid Input: </p>
+                            <p>@_result.Error</p>
+                        </div> break; 
+                    default:
+                        <div>
+                            <p>Enter values(s) below and select an operation.</p>
+                        </div> break;
                     }
-                </ErrorBoundary>
+                
             </th>
         </tr>
         <tr>
@@ -166,10 +163,10 @@
         
         <tr>
             <td colspan="1">
-                <input id="A" type="number" @bind="InputA"/>
+                <input id="A" type="number" @bind="_inputA"/>
             </td>
             <td colspan="1">
-                <input id="B" type="number" @bind="InputB"/>
+                <input id="B" type="number" @bind="_inputB"/>
             </td>
         </tr>
         
@@ -228,25 +225,26 @@
 
 <!--
 <table id="Calcualtor">
+    
     <tr>
         <th>Input A</th>
         <th>Input B</th>
-    </tr>
+    </tr>-->
     
     <tr>
         <td colspan="1">
-            <input id="A" type="number" @bind="InputA"/>
+            <input id="A" type="number" @bind="_inputA"/>
         </td>
         <td colspan="1">
-            <input id="B" type="number" @bind="InputB"/>
+            <input id="B" type="number" @bind="_inputB"/>
         </td>
     </tr>
-    
+    <!--
     <tr>
         <th>A and B</th>
         <th>A Only</th>
     </tr>
-    
+
     <tr>
         <td><button @onclick="CalculatorAdd" class="button">A + B</button></td>
         <td><button @onclick="CalculatorSubtract" class="button">A - B</button></td>
