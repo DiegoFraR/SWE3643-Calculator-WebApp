@@ -1,128 +1,44 @@
 @page "/"
 @rendermode InteractiveServer
+@using CalculatorEngine
+
 <PageTitle>Calculator</PageTitle>
 
-@using CalculatorEngine
-@code
-{
-    
-    private double _inputA;
-    private double _inputB;
-    private CalculationResult? _result;
-    private readonly ICalculatorEngine _calculatorEngine = new CalculatorEngine.Calculator();
-    
-
-    private void CalculatorAdd()
-    {
-        _result = _calculatorEngine.Add(_inputA, _inputB);
+<style>
+    table {
+        margin-left: auto;
+        margin-right: auto;
     }
 
-    private void CalculatorSubtract()
-    {
-        _result = _calculatorEngine.Subtract(_inputA, _inputB);
+    .button {
+        width: 100%;
+        padding: 10px 20px;
+        background-color: #2792a1;
+        color: #ffffff;
+        font-size: 15px;
+        font-weight: bold;
+        border: none;
+        border-radius: 5px;
     }
 
-    private void CalculatorMultiplication()
-    {
-        _result = _calculatorEngine.Multiplication(_inputA, _inputB);
+    .button:hover{
+        background-color: #144750;
     }
 
-    private void CalculatorDivision()
-    {
-        _result = _calculatorEngine.Division(_inputA, _inputB);
+    th,
+    td{
+        padding: 10px 15px;
+        font-size: 15px;
+        font-weight: bold;
+        border: none;
+        border-radius: 5px;
+    //border: 2px solid black;
+        text-align: left;
     }
+</style>
 
-    private void CalculatorEquals()
-    {
-        _result = _calculatorEngine.Equals(_inputA, _inputB);
-    }
 
-    private void CalculatorPower()
-    {
-        _result = _calculatorEngine.Power(_inputA, _inputB);
-    }
-
-    private void CalculatorLogarithm()
-    {
-        _result = _calculatorEngine.Logarithm(_inputA, _inputB);
-    }
-
-    private void CalculatorRoot()
-    {
-        _result = _calculatorEngine.Root(_inputA, _inputB);
-    }
-
-    private void CalculatorFactorial()
-    {
-        _result = _calculatorEngine.Factorial(_inputA);
-    }
-
-    private void CalculatorSine()
-    {
-        _result = _calculatorEngine.Sine(_inputA);
-    }
-
-    private void CalculatorCosine()
-    {
-        _result = _calculatorEngine.Cosine(_inputA);
-    }
-
-    private void CalculatorTangent()
-    {
-        _result = _calculatorEngine.Tangent(_inputA);
-    }
-
-    private void CalculatorReciprocal()
-    {
-        _result = _calculatorEngine.Reciprocal(_inputA);
-    }
-
-    private void Clear()
-    {
-        _result = null;
-        _inputA = 0;
-        _inputB = 0;
-    }
-}
-
-<head>
-    <Title>Calculator Web App</Title>
-    <style>
-        table { 
-                    margin-left: auto; 
-                    margin-right: auto; 
-                } 
-                  
-                .button { 
-                    width: 100%; 
-                    padding: 10px 20px; 
-                    background-color: #2792a1; 
-                    color: #ffffff; 
-                    font-size: 15px; 
-                    font-weight: bold; 
-                    border: none; 
-                    border-radius: 5px;
-                } 
-                
-                .button:hover{
-                    background-color: #144750; 
-                }
-                  
-                th,
-                 td{ 
-                    padding: 10px 15px; 
-                    font-size: 15px; 
-                    font-weight: bold; 
-                    border: none; 
-                    border-radius: 5px; 
-                    //border: 2px solid black;
-                    text-align: left;
-                } 
-    </style>
-</head>
-
-<body>
-    <table id="calcu">
+<table id="calcu">
         <tr>
             <th>Calculator</th>
             <td><button @onclick ="Clear" class="button">Clear</button></td>
@@ -163,10 +79,10 @@
         
         <tr>
             <td colspan="1">
-                <input id="A" type="number" @bind="_inputA"/>
+                <input id="A" type="number" @bind="InputA"/>
             </td>
             <td colspan="1">
-                <input id="B" type="number" @bind="_inputB"/>
+                <input id="B" type="number" @bind="InputB"/>
             </td>
         </tr>
         
@@ -205,61 +121,83 @@
             <td><button @onclick="CalculatorRoot" class="button">A root B</button></td>
         </tr>
     </table>
-</body>
 
+@code
+{   
+    private double InputA { get; set; }
+    private double InputB { get; set; }
+    private CalculationResult? _result;
+    private readonly ICalculatorEngine _calculatorEngine = new CalculatorEngine.Calculator();
 
+    private void CalculatorAdd()
+    {
+        _result = _calculatorEngine.Add(InputA, InputB);
+    }
 
+    private void CalculatorSubtract()
+    {
+        _result = _calculatorEngine.Subtract(InputA, InputB);
+    }
 
+    private void CalculatorMultiplication()
+    {
+        _result = _calculatorEngine.Multiplication(InputA, InputB);
+    }
 
+    private void CalculatorDivision()
+    {
+        _result = _calculatorEngine.Division(InputA, InputB);
+    }
 
+    private void CalculatorEquals()
+    {
+        _result = _calculatorEngine.Equals(InputA, InputB);
+    }
 
+    private void CalculatorPower()
+    {
+        _result = _calculatorEngine.Power(InputA, InputB);
+    }
 
+    private void CalculatorLogarithm()
+    {
+        _result = _calculatorEngine.Logarithm(InputA, InputB);
+    }
 
+    private void CalculatorRoot()
+    {
+        _result = _calculatorEngine.Root(InputA, InputB);
+    }
 
+    private void CalculatorFactorial()
+    {
+        _result = _calculatorEngine.Factorial(InputA);
+    }
 
+    private void CalculatorSine()
+    {
+        _result = _calculatorEngine.Sine(InputA);
+    }
 
+    private void CalculatorCosine()
+    {
+        _result = _calculatorEngine.Cosine(InputA);
+    }
 
+    private void CalculatorTangent()
+    {
+        _result = _calculatorEngine.Tangent(InputA);
+    }
 
+    private void CalculatorReciprocal()
+    {
+        _result = _calculatorEngine.Reciprocal(InputA);
+    }
 
-
-
-<!--
-<table id="Calcualtor">
-    
-    <tr>
-        <th>Input A</th>
-        <th>Input B</th>
-    </tr>-->
-    
-    <tr>
-        <td colspan="1">
-            <input id="A" type="number" @bind="_inputA"/>
-        </td>
-        <td colspan="1">
-            <input id="B" type="number" @bind="_inputB"/>
-        </td>
-    </tr>
-    <!--
-    <tr>
-        <th>A and B</th>
-        <th>A Only</th>
-    </tr>
-
-    <tr>
-        <td><button @onclick="CalculatorAdd" class="button">A + B</button></td>
-        <td><button @onclick="CalculatorSubtract" class="button">A - B</button></td>
-        <td><button @onclick="CalculatorMultiplication" class="button">A * B</button></td>
-        <td><button @onclick="CalculatorDivision" class="button">A / B</button></td>
-        <td><button @onclick="CalculatorEquals" class="button">A == B</button></td>
-        <td><button @onclick="CalculatorPower" class="button">A ^ B</button></td>
-        <td><button @onclick="CalculatorLogarithm" class="button">A log B</button></td>
-        <td><button @onclick="CalculatorRoot" class="button">A root B</button></td>
-    </tr>
-    <tr>
-        <td><button @onclick="CalculatorFactorial" class="button">A !</button></td>
-        <td><button @onclick="CalculatorSine" class="button">sin A</button></td>
-        <td><button @onclick="CalculatorCosine" class="button">cos A</button></td>
-        <td><button @onclick="CalculatorTangent" class="button">tan A</button></td>
-        <td><button @onclick="CalculatorReciprocal" class="button">1 / A</button></td>
-    </tr>
-</table>-->
+    private void Clear()
+    {
+        _result = null;
+        InputA = 0;
+        InputB = 0;
+    }
+}
