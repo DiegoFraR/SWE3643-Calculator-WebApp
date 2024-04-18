@@ -35,7 +35,18 @@
     //border: 2px solid black;
         text-align: left;
     }
+    .error {
+    background-color: #B70F0A;
+    color:  #FFFFFF;
+    text-align: center;
+    }
+    .defaultResult {
+    background-color: #FFECD7;
+    color:  #000000;
+    text-align: center;
+    }
 </style>
+
 
 
 <table id="calcu">
@@ -50,22 +61,21 @@
                 {
                     case { IsSuccess: true }:
                     {
-                        <div>
-                            <h4>Result:</h4>
+                        <div class="defaultResult">
+                            <h4>@_result.Operation</h4>
                             <p>@_result.Result</p>
-                            <p>@_result.IsSuccess</p>
                             @if (!_result.IsSuccess) {
                                 <p>Error: @_result.Error</p>
                             }
                         </div> break;
                         }
                     case { IsSuccess: false }:
-                        <div>
+                        <div class="error">
                             <p>Invalid Input: </p>
                             <p>@_result.Error</p>
                         </div> break; 
                     default:
-                        <div>
+                        <div class="defaultResult">
                             <p>Enter values(s) below and select an operation.</p>
                         </div> break;
                     }

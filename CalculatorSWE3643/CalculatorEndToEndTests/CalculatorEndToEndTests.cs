@@ -1,6 +1,3 @@
-// CalculatorWebServiceApp;
-
-
 namespace CalculatorEndToEndTests;
 
 [Parallelizable(ParallelScope.Self)]
