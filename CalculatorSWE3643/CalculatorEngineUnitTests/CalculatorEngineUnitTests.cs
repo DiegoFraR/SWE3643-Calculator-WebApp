@@ -368,4 +368,36 @@ public class Tests
         //Act + Assert
         Assert.That(result.Error, Is.EqualTo(expected));
     }
+    
+    //preq-UNIT-TEST-PERSONAL
+    [Test]
+    public void CalcualtorIsSuccess_ReturnsTrue_WhenValidArthimetic()
+    {
+        //Arrange
+        const double a = 3;
+        const double b = 2.5;
+        
+        //Act
+        var result = _calculator.Add(a, b);
+        
+        //Assert
+        Assert.That(result.IsSuccess, Is.EqualTo(true));
+    }
+    
+    //preq-UNIT-TEST-PERSONAL
+    [Test]
+    public void CalculatorOperation_IsValid_ReturnsAccurateOperation()
+    {
+        //Arrange
+        const double a = 3;
+        const double b = 2.5;
+        const string expected = "3 + 2.5";
+         
+        //Act
+        var result = _calculator.Add(a, b);
+        
+        //Assert
+        Assert.That(result.Operation, Is.EqualTo(expected));
+        
+    }
 }
