@@ -62,9 +62,9 @@ https://localhost:7254/
 __For the best results, ensure you are running the web application prior to running any tests.__
 1. While the application is running, paste the following command into your terminal/command line:
 ```bash 
-
+dotnet test
 ```
-2. Review the results, and you will be able to see all 24 tests passed. 
+2. Review the results, and you will be able to see all 24 tests passed.
 3. If any tests failure, review the code and tests carefully. All tests should be run and pass the first time.
 ## Reviewing Unit Test Coverage
 1. For my Calculator Web Application, I am able to obtain 100% coverage of all my methods in my Calculator Engine section. All the method are covered.
@@ -73,7 +73,7 @@ __For the best results, ensure you are running the web application prior to runn
 1. To run the end-to-end tests, you __must__ have the web application running on your machine. 
 2. After running the application, paste the following command in your terminal/command line:
 ```bash
-
+dotnet test
  ```
 
 ## Final Video Presentation
