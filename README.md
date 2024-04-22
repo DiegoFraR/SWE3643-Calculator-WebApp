@@ -42,7 +42,7 @@ git clone https://github.com/DiegoFraR/SWE3643-Calculator-WebApp
 If you are using JetBrains Rider, simply open the project in Rider and click the green run button at the top-right of the page. (Shown Below)
 
 To configure Playwright for End-To-End Testing:
-1. [Install Playwright to the folder with this project.](https://playwright.dev/docs/intro)
+1. [Install Playwright](https://playwright.dev/docs/intro)
 
 ## Executing the Web Application
 1. Ensure you have completed all the required steps in the previous [Environment](#environment) section.
@@ -74,7 +74,8 @@ __For the best results, ensure you are running the web application prior to runn
 2. After running the application, paste the following command in your terminal/command line:
 ```bash
 
-2. ```
+ ```
+
 ## Final Video Presentation
 - [Final Presentation Video]()
 
