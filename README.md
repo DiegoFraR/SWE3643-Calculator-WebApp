@@ -26,7 +26,7 @@ engine. These tests include verifying the correct result comes as a result of th
 contains the user interface and controller (bundled together in the Calculator.Razor file) which calls the calculator logic
 directly to use the logics functions. The diagram below shows the architecture implemented into this project which depicts the calculator logic,
 calculator engine unit tests, web application, and end-to-end tests being in their own separate "projects" under the same solution. 
-![](/Users/diegofraustoramirez/Desktop/KSU Spring '24/Calculator Project Architecture.png)
+![](Calculator-Project_Architecture.png)
 ## Environment
 This is a cross-platform application and should work in Windows 10+, Mac-OS Ventura+, and linux environments. This application was developed in both a 
 Windows and macOS environment, using JetBrains Rider. For the best experience using this application, I recommend downloading
@@ -67,8 +67,8 @@ __For the best results, ensure you are running the web application prior to runn
 2. Review the results, and you will be able to see all 24 tests passed. 
 3. If any tests failure, review the code and tests carefully. All tests should be run and pass the first time.
 ## Reviewing Unit Test Coverage
-1. For my Calculator Web Application, I am able to obtain 100% coverage of all my methods in my Calculator Engine section. All the method are covered. 
-![](/Users/diegofraustoramirez/Desktop/Screenshot 2024-04-22 at 3.52.45 PM.png)
+1. For my Calculator Web Application, I am able to obtain 100% coverage of all my methods in my Calculator Engine section. All the method are covered.
+   ![Calculator Unit Coverage](Unit-Test-Coverage.png)
 ## Executing End-To-End Tests
 1. To run the end-to-end tests, you __must__ have the web application running on your machine. 
 2. After running the application, paste the following command in your terminal/command line:
