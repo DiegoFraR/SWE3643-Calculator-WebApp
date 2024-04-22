@@ -26,7 +26,7 @@ engine. These tests include verifying the correct result comes as a result of th
 contains the user interface and controller (bundled together in the Calculator.Razor file) which calls the calculator logic
 directly to use the logics functions. The diagram below shows the architecture implemented into this project which depicts the calculator logic,
 calculator engine unit tests, web application, and end-to-end tests being in their own separate "projects" under the same solution. 
-![](Calculator-Project_Architecture.png)
+![](Calculator-Project-Architecture.png)
 ## Environment
 This is a cross-platform application and should work in Windows 10+, Mac-OS Ventura+, and linux environments. This application was developed in both a 
 Windows and macOS environment, using JetBrains Rider. For the best experience using this application, I recommend downloading
