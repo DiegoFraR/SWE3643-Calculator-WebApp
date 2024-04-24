@@ -42,40 +42,61 @@ git clone https://github.com/DiegoFraR/SWE3643-Calculator-WebApp
 If you are using JetBrains Rider, simply open the project in Rider and click the green run button at the top-right of the page. (Shown Below)
 
 To configure Playwright for End-To-End Testing:
-1. [Install Playwright](https://playwright.dev/docs/intro)
+1. [Install Playwright to the directory of this project.](https://playwright.dev/docs/intro)
 
 ## Executing the Web Application
 1. Ensure you have completed all the required steps in the previous [Environment](#environment) section.
-2. Using the terminal/Command Line, navigate to the directory of this project. 
-3. Run the following command to run the web application.
+2. Using the terminal/Command Line, navigate to the directory of this project on your machine using the cd command. This directory is where you will then 
+navigate to the respective solutions that run the web application, unit tests, and end-to-end tests. This directory will look something like this (type ls after entering the directory to see the listings):
+![Directory Shown](Navigate-to-Directory-of-Project.png)
+3. Navigate to the directory 'CalculatorWebServiceApp' using the following command
+```bash
+cd CalculatorWebServiceApp
+```
+4. Once in this directory, run the following command: 
 ```bash
 dotnet run
 ```
-4. After running the command, the terminal will look like this:
-5. Launch your web browser (Chrome, Safari, Edge, etc.) and copy the following URL link into your browser head:
+5. After running the command, the terminal will look like this:
+![Running Application in Terminal Screen](Running-Application.png)
+6. Launch your web browser (Chrome, Safari, Edge, etc.) and copy the following URL link into your browser head:
 ```bash
-https://localhost:7254/
+https://localhost:5093/
 ```
+__If this link does not work, pay close attention to the localhost listening the terminal gives you.__
 6. You can now interact with the Calculator Web Application!
-7. When you are finished using the application, press Control+C twice (Command+C in macOS) to terminate the program.
+![Application in Browser](Running-Application-In-Browser.png)
+7. When you are finished using the application, press Control+C twice (Command+C in macOS) in the terminal to terminate the program.
+
 ## Executing Unit Tests
-__For the best results, ensure you are running the web application prior to running any tests.__
-1. While the application is running, paste the following command into your terminal/command line:
+__If the application is running, open a new terminal window to do the unit tests.__
+1. Navigate to the directory of this project on your machine using the cd command.
+2. Navigate to the directory 'CalculatorEngineUnitTests' using the following command
 ```bash 
-dotnet test
+cd CalculatorEngineUnitTests
 ```
-2. Review the results, and you will be able to see all 24 tests passed.
-3. If any tests failure, review the code and tests carefully. All tests should be run and pass the first time.
+3. Once you are in the directory, type or paste the following command to run the unit tests from the terminal:
+```bash
+dotnet test 
+```
+4. Review the results you see in the terminal. 24 tests should run and pass. 
+![Unit Tests Ran in Terminal](Unit-Tests-Ran-In-Terminal.png)
 ## Reviewing Unit Test Coverage
 1. For my Calculator Web Application, I am able to obtain 100% coverage of all my methods in my Calculator Engine section. All the method are covered.
    ![Calculator Unit Coverage](Unit-Test-Coverage.png)
 ## Executing End-To-End Tests
 1. To run the end-to-end tests, you __must__ have the web application running on your machine. 
-2. After running the application, paste the following command in your terminal/command line:
+2. After running the application, open a new terminal window and navigate to the directory of this project using the cd command.
+3. Once in the directory, navigate to the 'CalculatorEndToEndTests' directory using the following command:
+```bash
+cd CalculatorEndToEndTests
+ ```
+4. Once in this directory, type or paste the following command to run the end-to-end tests:
 ```bash
 dotnet test
- ```
-
+```
+5. Review the results you see in the terminal.
+*__Add Picture once PlayWright Tests are coded__*
 ## Final Video Presentation
-- [Final Presentation Video]()
+- [Final Presentation Video]() *MISSING LINK STILL* 
 
