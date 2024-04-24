@@ -52,7 +52,7 @@
 <table id="calcu">
         <tr>
             <th>Calculator</th>
-            <td><button @onclick ="Clear" class="button">Clear</button></td>
+            <td><button @onclick ="Clear" aria-label="clear" class="button">Clear</button></td>
         </tr>
         
         <tr>
@@ -63,7 +63,7 @@
                     {
                         <div class="defaultResult">
                             <h4>@_result.Operation</h4>
-                            <p>@_result.Result</p>
+                            <p aria-label="result">@_result.Result</p>
                             @if (!_result.IsSuccess) {
                                 <p>Error: @_result.Error</p>
                             }
@@ -72,11 +72,11 @@
                     case { IsSuccess: false }:
                         <div class="error">
                             <p>Invalid Input: </p>
-                            <p>@_result.Error</p>
+                            <p aria-label="error">@_result.Error</p>
                         </div> break; 
                     default:
                         <div class="defaultResult">
-                            <p>Enter values(s) below and select an operation.</p>
+                            <p aria-label="defaultLabel">Enter values(s) below and select an operation.</p>
                         </div> break;
                     }
                 
@@ -89,10 +89,10 @@
         
         <tr>
             <td colspan="1">
-                <input id="A" type="number" @bind="InputA"/>
+                <input aria-label="A" type="number" @bind="InputA"/>
             </td>
             <td colspan="1">
-                <input id="B" type="number" @bind="InputB"/>
+                <input aria-label="B" type="number" @bind="InputB"/>
             </td>
         </tr>
         
@@ -102,33 +102,33 @@
         </tr>
         
         <tr>
-            <td><button @onclick="CalculatorAdd" class="button">A + B</button></td>
-            <td><button @onclick="CalculatorFactorial" class="button">A !</button></td>
+            <td><button @onclick="CalculatorAdd" aria-label="add" class="button">A + B</button></td>
+            <td><button @onclick="CalculatorFactorial" aria-label="factorial" class="button">A !</button></td>
         </tr>
         <tr>
-            <td><button @onclick="CalculatorSubtract" class="button">A - B</button></td>
-            <td><button @onclick="CalculatorSine" class="button">sin A</button></td>
+            <td><button @onclick="CalculatorSubtract" aria-label="subtract" class="button">A - B</button></td>
+            <td><button @onclick="CalculatorSine" aria-label="sine" class="button">sin A</button></td>
         </tr>
         <tr>
-            <td><button @onclick="CalculatorMultiplication" class="button">A * B</button></td>
-            <td><button @onclick="CalculatorCosine" class="button">cos A</button></td>
+            <td><button @onclick="CalculatorMultiplication" aria-label="multi" class="button">A * B</button></td>
+            <td><button @onclick="CalculatorCosine" aria-label="cosine" class="button">cos A</button></td>
         </tr>
         <tr>
-            <td><button @onclick="CalculatorDivision" class="button">A / B</button></td>
-            <td><button @onclick="CalculatorTangent" class="button">tan A</button></td>
+            <td><button @onclick="CalculatorDivision" aria-label="divide" class="button">A / B</button></td>
+            <td><button @onclick="CalculatorTangent" aria-label="tangent" class="button">tan A</button></td>
         </tr>
         <tr>
-            <td><button @onclick="CalculatorEquals" class="button">A == B</button></td>
-            <td><button @onclick="CalculatorReciprocal" class="button">1 / A</button></td>
+            <td><button @onclick="CalculatorEquals" aria-label="equal" class="button">A == B</button></td>
+            <td><button @onclick="CalculatorReciprocal" aria-label="reciprocal" class="button">1 / A</button></td>
         </tr>
         <tr>
-            <td><button @onclick="CalculatorPower" class="button">A ^ B</button></td>
+            <td><button @onclick="CalculatorPower" aria-label="exponential" class="button">A ^ B</button></td>
         </tr>
         <tr>
-            <td><button @onclick="CalculatorLogarithm" class="button">A log B</button></td>
+            <td><button @onclick="CalculatorLogarithm" aria-label="log" class="button">A log B</button></td>
         </tr>
         <tr>
-            <td><button @onclick="CalculatorRoot" class="button">A root B</button></td>
+            <td><button @onclick="CalculatorRoot" aria-label="root" class="button">A root B</button></td>
         </tr>
     </table>
 
