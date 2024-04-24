@@ -64,9 +64,9 @@ dotnet run
 https://localhost:5093/
 ```
 __If this link does not work, pay close attention to the localhost listening the terminal gives you.__
-6. You can now interact with the Calculator Web Application!
+7. You can now interact with the Calculator Web Application!
 ![Application in Browser](Running-Application-In-Browser.png)
-7. When you are finished using the application, press Control+C twice (Command+C in macOS) in the terminal to terminate the program.
+8. When you are finished using the application, press Control+C twice (Command+C in macOS) in the terminal to terminate the program.
 
 ## Executing Unit Tests
 __If the application is running, open a new terminal window to do the unit tests.__
