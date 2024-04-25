@@ -13,8 +13,8 @@
     .button {
         width: 100%;
         padding: 10px 20px;
-        background-color: #2792a1;
-        color: #ffffff;
+        background-color: #EBEBEB;
+        color: #000000;
         font-size: 15px;
         font-weight: bold;
         border: none;
@@ -22,7 +22,7 @@
     }
 
     .button:hover{
-        background-color: #144750;
+        background-color: #2792a1;
     }
 
     th,
@@ -30,9 +30,8 @@
         padding: 10px 15px;
         font-size: 15px;
         font-weight: bold;
-        border: none;
+        border: 2px solid white;
         border-radius: 5px;
-    //border: 2px solid black;
         text-align: left;
     }
     .error {
@@ -51,7 +50,7 @@
 
 <table id="calcu">
         <tr>
-            <th>Calculator</th>
+            <th><h1>Calculator</h1></th>
             <td><button @onclick ="Clear" aria-label="clear" class="button">Clear</button></td>
         </tr>
         
@@ -89,16 +88,16 @@
         
         <tr>
             <td colspan="1">
-                <input aria-label="A" type="number" @bind="InputA"/>
+                <input aria-label="A" type="text" @bind="InputA"/>
             </td>
             <td colspan="1">
-                <input aria-label="B" type="number" @bind="InputB"/>
+                <input aria-label="B" type="text" @bind="InputB"/>
             </td>
         </tr>
         
-        <tr>
-            <th>A and B</th>
-            <th>A Only</th>
+        <tr style="background: #EBEBEB; color: #000000;">
+            <th><b>A and B</b></th>
+            <th><b>A Only</b></th>
         </tr>
         
         <tr>

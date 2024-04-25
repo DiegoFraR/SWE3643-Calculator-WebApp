@@ -39,14 +39,14 @@ public class Tests : PageTest
         await Page.GetByLabel("add", new() { Exact = true }).ClickAsync();
         
         //get result
-        string result = await Page.GetByLabel("result", new() { Exact = true }).TextContentAsync();
+        string result6 = await Page.GetByLabel("result", new() { Exact = true }).TextContentAsync();
 
         //write to console for verification
         Console.Write("Test 6: ");
-        Console.Write(result);
+        Console.Write(result6);
         
         //string to int
-        var actualSum = int.Parse(result);
+        var actualSum = int.Parse(result6);
 
         //calculate expected
         var expectedSum = 5 + 7;
@@ -73,20 +73,21 @@ public class Tests : PageTest
          await Page.GetByLabel("divide", new() { Exact = true }).ClickAsync();
          
          //get result
-         string result = await Page.GetByLabel("error", new() { Exact = true }).TextContentAsync();
+         string result7 = await Page.GetByLabel("error", new() { Exact = true }).TextContentAsync();
 
          //write to console for verification
          Console.Write("Test 7: ");
-         Console.Write(result);
+         Console.Write(result7);
          
          //expected error
          var expectedOutput = "Cannot Divide by 0";
      
          //verify
-         Assert.That(result, Is.EqualTo(expectedOutput));
+         Assert.That(result7, Is.EqualTo(expectedOutput));
      }
     
     //preq-E2E-TEST-8
+    
     
     //preq-E2E-TEST-9
     [Test]
