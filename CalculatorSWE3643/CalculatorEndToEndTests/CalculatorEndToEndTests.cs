@@ -4,36 +4,119 @@ namespace CalculatorEndToEndTests;
 [TestFixture]
 public class Tests : PageTest
 {
-    [Test]
-    public async Task HomepageHasPlaywrightInTitleAndGetStartedLinkLinkingtoTheIntroPage()
-    {
-        await Page.GotoAsync("https://playwright.dev");
-
-        // Expect a title "to contain" a substring.
-        await Expect(Page).ToHaveTitleAsync(new Regex("Playwright"));
-
-        // create a locator
-        var getStarted = Page.Locator("text=Get Started");
-
-        // Expect an attribute "to be strictly equal" to the value.
-        await Expect(getStarted).ToHaveAttributeAsync("href", "/docs/intro");
-
-        // Click the get started link.
-        await getStarted.ClickAsync();
-
-        // Expects the URL to contain intro.
-        await Expect(Page).ToHaveURLAsync(new Regex(".*intro"));
-    }
-
+    //preq-E2E-TEST-5
     [Test]
     public async Task CalculatorWebUi_PageTitle_IsCalculator()
     {
-        //Arrange
         const string pageTitle = "Calculator";
-        //Act
+
         await Page.GotoAsync("http://localhost:5093/");
-        //Assert
+        
         await Expect(Page).ToHaveTitleAsync(pageTitle);
+    }
+    
+    //preq-E2E-TEST-6
+    [Test]
+    public async Task VerifyAdditionOperation()
+    {
+        //refresh page
+        await Page.ReloadAsync();
+        
+        //load webpage
+        await Page.GotoAsync("http://localhost:5093/");
+        
+        //values into A and B
+        await Page.GetByLabel("A", new() { Exact = true }).FillAsync("5");
+        await Page.GetByLabel("B", new() { Exact = true }).FillAsync("7");
+
+        //add button
+        await Page.GetByLabel("add", new() { Exact = true }).ClickAsync();
+        
+        //get result
+        string result6 = await Page.GetByLabel("result", new() { Exact = true }).TextContentAsync();
+
+        //write to console for verification
+        Console.Write("Test 6: ");
+        Console.Write(result6);
+        
+        //string to int
+        var actualSum = int.Parse(result6);
+
+        //calculate expected
+        var expectedSum = 5 + 7;
+
+        //verify
+        Assert.That(actualSum, Is.EqualTo(expectedSum));
+    }
+    
+    //preq-E2E-TEST-7
+     [Test]
+     public async Task DivideByZeroError()
+     {
+         //refresh page
+         await Page.ReloadAsync();
+         
+         //load webpage
+         await Page.GotoAsync("http://localhost:5093/");
+     
+         //values into A and B
+         await Page.GetByLabel("A", new() { Exact = true }).FillAsync("5");
+         await Page.GetByLabel("B", new() { Exact = true }).FillAsync("0");
+     
+         //divide button
+         await Page.GetByLabel("divide", new() { Exact = true }).ClickAsync();
+         
+         //get result
+         string result7 = await Page.GetByLabel("error", new() { Exact = true }).TextContentAsync();
+
+         //write to console for verification
+         Console.Write("Test 7: ");
+         Console.Write(result7);
+         
+         //expected error
+         var expectedOutput = "Cannot Divide by 0";
+     
+         //verify
+         Assert.That(result7, Is.EqualTo(expectedOutput));
+     }
+    
+    //preq-E2E-TEST-8
+    
+    
+    //preq-E2E-TEST-9
+    [Test]
+    public async Task ClearPage()
+    {
+        //refresh page
+        await Page.ReloadAsync();
+        
+        //load webpage
+        await Page.GotoAsync("http://localhost:5093/");
+        
+        //values into A and B
+        await Page.GetByLabel("A", new() { Exact = true }).FillAsync("5");
+        await Page.GetByLabel("B", new() { Exact = true }).FillAsync("7");
+        
+        //add button
+        await Page.GetByLabel("add", new() { Exact = true }).ClickAsync();
+        
+        //clear
+        await Page.GetByLabel("clear", new() { Exact = true }).ClickAsync();
+        
+        //get values
+        string inputA = await Page.GetByLabel("A", new() { Exact = true }).TextContentAsync();
+        string inputB = await Page.GetByLabel("B", new() { Exact = true }).TextContentAsync();
+        string label = await Page.GetByLabel("defaultLabel", new() { Exact = true }).TextContentAsync();
+        
+        //set expected results
+        string expectedA = "";
+        string expectedB = "";
+        string expectedLabel = "Enter values(s) below and select an operation.";
+        
+        //verify
+        Assert.That(inputA, Is.EqualTo(expectedA));
+        Assert.That(inputB, Is.EqualTo(expectedB)); 
+        Assert.That(label, Is.EqualTo(expectedLabel));
     }
     
 }
