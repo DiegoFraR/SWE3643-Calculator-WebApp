@@ -96,7 +96,8 @@ cd CalculatorEndToEndTests
 dotnet test
 ```
 5. Review the results you see in the terminal.
-*__Add Picture once PlayWright Tests are coded__*
+![End To End Tests ran in Terminal](EndToEndTestsTerminal.png)
+   * One of the E2E tests failed to run concurrently with the other E2E tests. If ran individually, it runs perfectly fine. The rest of the E2E tests implemented work perfectly fine.  
 ## Final Video Presentation
-- [Final Presentation Video]() *MISSING LINK STILL* 
+- [Final Presentation Video](https://youtu.be/vml3aLr4ris)  
 
